@@ -1,11 +1,11 @@
 package com.ifood.service;
 
 import com.ifood.model.*;
-import com.ifood.repository.OrderRepository;
+import com.ifood.repository.IOrderRepository;
 import java.util.List;
 
 public class OrderService {
-    private OrderRepository repository = new OrderRepository();
+    private IOrderRepository repository = new IOrderRepository();
 
     public void addOrder(int id, Customer customer, DeliveryPerson deliveryPerson,
                          Restaurant restaurant, List<MenuItem> items) {

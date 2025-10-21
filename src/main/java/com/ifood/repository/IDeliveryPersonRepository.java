@@ -4,7 +4,7 @@ import com.ifood.model.DeliveryPerson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeliveryPersonRepository implements CrudRepository<DeliveryPerson> {
+public class IDeliveryPersonRepository implements ICrudRepository<DeliveryPerson> {
     private List<DeliveryPerson> deliveryPeople = new ArrayList<>();
 
     @Override

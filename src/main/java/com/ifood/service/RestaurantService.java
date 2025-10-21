@@ -1,11 +1,11 @@
 package com.ifood.service;
 
 import com.ifood.model.Restaurant;
-import com.ifood.repository.RestaurantRepository;
+import com.ifood.repository.IRestaurantRepository;
 import java.util.List;
 
 public class RestaurantService {
-    private RestaurantRepository repository = new RestaurantRepository();
+    private IRestaurantRepository repository = new IRestaurantRepository();
 
     public void addRestaurant(int id, String name) {
         Restaurant restaurant = new Restaurant(id, name);

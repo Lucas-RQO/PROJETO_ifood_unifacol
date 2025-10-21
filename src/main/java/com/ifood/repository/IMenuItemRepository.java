@@ -4,7 +4,7 @@ import com.ifood.model.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuItemRepository implements CrudRepository<MenuItem> {
+public class IMenuItemRepository implements ICrudRepository<MenuItem> {
     private List<MenuItem> items = new ArrayList<>();
 
     @Override

@@ -1,11 +1,11 @@
 package com.ifood.service;
 
 import com.ifood.model.MenuItem;
-import com.ifood.repository.MenuItemRepository;
+import com.ifood.repository.IMenuItemRepository;
 import java.util.List;
 
 public class MenuItemService {
-    private MenuItemRepository repository = new MenuItemRepository();
+    private IMenuItemRepository repository = new IMenuItemRepository();
 
     public void addMenuItem(int id, String name, double price) {
         MenuItem item = new MenuItem(id, name, price);

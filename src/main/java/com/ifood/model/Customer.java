@@ -1,18 +1,22 @@
 package com.ifood.model;
 
 public class Customer extends Person {
-    private String address;
+    private String email;
 
-    public Customer(int id, String name, String address) {
-        super(id, name);
-        this.address = address;
+    public Customer() {}
+
+    public Customer(int id, String name, String phone, String email) {
+        super(id, name, phone);
+        this.email = email;
     }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     @Override
-    public String getDetails() {
-        return "Cliente: " + getName() + " | Endereço: " + address;
+    public void displayInfo() {
+        System.out.println("Cliente [ID=" + getId() + ", Nome=" + getName() + 
+                           ", Telefone=" + getPhone() + ", Email=" + email + "]");
     }
 }
+

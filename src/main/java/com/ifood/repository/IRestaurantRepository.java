@@ -4,7 +4,7 @@ import com.ifood.model.Restaurant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantRepository implements CrudRepository<Restaurant> {
+public class IRestaurantRepository implements ICrudRepository<Restaurant> {
     private List<Restaurant> restaurants = new ArrayList<>();
 
     @Override
