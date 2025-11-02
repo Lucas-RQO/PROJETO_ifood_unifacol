@@ -5,7 +5,7 @@ import com.ifood.repository.IDeliveryPersonRepository;
 import java.util.List;
 
 public class DeliveryPersonService {
-    private IDeliveryPersonRepository repository = new IDeliveryPersonRepository();
+    private final IDeliveryPersonRepository repository = new IDeliveryPersonRepository();
 
     public void addDeliveryPerson(int id, String name, String vehicle) {
         DeliveryPerson deliveryPerson = new DeliveryPerson(id, name, vehicle);

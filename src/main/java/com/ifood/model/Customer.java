@@ -18,5 +18,13 @@ public class Customer extends Person {
         System.out.println("Cliente [ID=" + getId() + ", Nome=" + getName() + 
                            ", Telefone=" + getPhone() + ", Email=" + email + "]");
     }
+
+    // Return a single-line representation used by views
+    public String getDetails() {
+        return "Cliente [ID=" + getId() + ", Nome=" + getName() + ", Telefone=" + getPhone() + ", Email=" + email + "]";
+    }
+
+    @Override
+    public String toString() { return getDetails(); }
 }
 

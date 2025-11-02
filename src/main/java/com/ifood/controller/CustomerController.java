@@ -2,21 +2,22 @@ package com.ifood.controller;
 
 import com.ifood.model.Customer;
 import com.ifood.service.CustomerService;
+
 import java.util.List;
 
 public class CustomerController {
-    private CustomerService service = new CustomerService();
+    private final CustomerService service = new CustomerService();
 
-    public void addCustomer(int id, String name, String address) {
-        service.addCustomer(id, name, address);
+    public void addCustomer(int id, String name, String phone, String email) {
+        service.addCustomer(id, name, phone, email); // ✅ passar o email
     }
 
     public void removeCustomer(int id) {
         service.removeCustomer(id);
     }
 
-    public void updateCustomer(int id, String newName, String newAddress) {
-        service.updateCustomer(id, newName, newAddress);
+    public void updateCustomer(int id, String newName, String newPhone, String newEmail) {
+        service.updateCustomer(id, newName, newPhone, newEmail); // ✅ passar o email
     }
 
     public Customer findCustomerById(int id) {

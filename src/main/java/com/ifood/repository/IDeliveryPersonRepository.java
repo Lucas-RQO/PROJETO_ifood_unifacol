@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IDeliveryPersonRepository implements ICrudRepository<DeliveryPerson> {
-    private List<DeliveryPerson> deliveryPeople = new ArrayList<>();
+    private final List<DeliveryPerson> deliveryPeople = new ArrayList<>();
 
     @Override
     public void add(DeliveryPerson entity) {

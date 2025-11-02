@@ -2,29 +2,35 @@ package com.ifood.service;
 
 import com.ifood.model.Customer;
 import com.ifood.repository.ICustomerRepository;
+import com.ifood.repository.CustomerRepository;
 import java.util.List;
 
 public class CustomerService {
-    private ICustomerRepository repository = new ICustomerRepository();
+    private final ICustomerRepository repository = new CustomerRepository();
 
-    public void addCustomer(int id, String name, String address) {
-        Customer customer = new Customer(id, name, address);
+    // Adicionando cliente
+    public void addCustomer(int id, String name, String phone, String email) {
+        Customer customer = new Customer(id, name, phone, email);
         repository.add(customer);
     }
 
+    // Remover cliente
     public void removeCustomer(int id) {
-        repository.remove(id);
+        repository.delete(id);
     }
 
-    public void updateCustomer(int id, String newName, String newAddress) {
-        Customer customer = new Customer(id, newName, newAddress);
-        repository.update(id, customer);
+    // Atualizar cliente
+    public void updateCustomer(int id, String newName, String newPhone, String newEmail) {
+        Customer customer = new Customer(id, newName, newPhone, newEmail);
+        repository.update(customer);
     }
 
+    // Buscar cliente
     public Customer findCustomerById(int id) {
         return repository.findById(id);
     }
 
+    // Listar todos
     public List<Customer> getAllCustomers() {
         return repository.findAll();
     }

@@ -6,13 +6,13 @@ import com.ifood.model.*;
 import java.util.*;
 
 public class MainView {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    private CustomerController customerController = new CustomerController();
-    private DeliveryPersonController deliveryPersonController = new DeliveryPersonController();
-    private RestaurantController restaurantController = new RestaurantController();
-    private MenuItemController menuItemController = new MenuItemController();
-    private OrderController orderController = new OrderController();
+    private final CustomerController customerController = new CustomerController();
+    private final DeliveryPersonController deliveryPersonController = new DeliveryPersonController();
+    private final RestaurantController restaurantController = new RestaurantController();
+    private final MenuItemController menuItemController = new MenuItemController();
+    private final OrderController orderController = new OrderController();
 
     public void start() {
         int option;
@@ -53,15 +53,17 @@ public class MainView {
             case 1 -> {
                 System.out.print("ID: "); int id = scanner.nextInt(); scanner.nextLine();
                 System.out.print("Nome: "); String name = scanner.nextLine();
-                System.out.print("Endereço: "); String address = scanner.nextLine();
-                customerController.addCustomer(id, name, address);
+                System.out.print("Telefone: "); String phone = scanner.nextLine();
+                System.out.print("Email: "); String email = scanner.nextLine();
+                customerController.addCustomer(id, name, phone, email);
             }
             case 2 -> customerController.getAllCustomers().forEach(c -> System.out.println(c.getDetails()));
             case 3 -> {
                 System.out.print("ID: "); int id = scanner.nextInt(); scanner.nextLine();
                 System.out.print("Novo Nome: "); String name = scanner.nextLine();
-                System.out.print("Novo Endereço: "); String address = scanner.nextLine();
-                customerController.updateCustomer(id, name, address);
+                System.out.print("Novo Telefone: "); String phone = scanner.nextLine();
+                System.out.print("Novo Email: "); String email = scanner.nextLine();
+                customerController.updateCustomer(id, name, phone, email);
             }
             case 4 -> {
                 System.out.print("ID: "); int id = scanner.nextInt();
@@ -195,5 +197,21 @@ public class MainView {
                 orderController.removeOrder(id);
             }
         }
+    }
+
+    public RestaurantController getRestaurantController() {
+        return restaurantController;
+    }
+
+    public OrderController getOrderController() {
+        return orderController;
+    }
+
+    public MenuItemController getMenuItemController() {
+        return menuItemController;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 }

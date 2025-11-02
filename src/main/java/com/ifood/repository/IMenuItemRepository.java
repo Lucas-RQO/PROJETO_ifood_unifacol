@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IMenuItemRepository implements ICrudRepository<MenuItem> {
-    private List<MenuItem> items = new ArrayList<>();
+    private final List<MenuItem> items = new ArrayList<>();
 
     @Override
     public void add(MenuItem entity) {

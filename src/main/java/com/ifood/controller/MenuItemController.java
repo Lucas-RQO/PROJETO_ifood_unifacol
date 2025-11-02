@@ -5,7 +5,7 @@ import com.ifood.service.MenuItemService;
 import java.util.List;
 
 public class MenuItemController {
-    private MenuItemService service = new MenuItemService();
+    private final MenuItemService service = new MenuItemService();
 
     public void addMenuItem(int id, String name, double price) {
         service.addMenuItem(id, name, price);
