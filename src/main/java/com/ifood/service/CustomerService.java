@@ -1,12 +1,11 @@
 package com.ifood.service;
 
 import com.ifood.model.Customer;
-import com.ifood.repository.ICustomerRepository;
-import com.ifood.repository.CustomerRepository;
+import com.ifood.repository.CustomerRepositoryJDBC;
 import java.util.List;
 
 public class CustomerService {
-    private final ICustomerRepository repository = new CustomerRepository();
+    private final CustomerRepositoryJDBC repository = new CustomerRepositoryJDBC();
 
     // Adicionando cliente
     public void addCustomer(int id, String name, String phone, String email) {

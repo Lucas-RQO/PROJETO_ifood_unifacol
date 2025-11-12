@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IRestaurantRepository implements ICrudRepository<Restaurant> {
-    private List<Restaurant> restaurants = new ArrayList<>();
+    private final List<Restaurant> restaurants = new ArrayList<>();
 
     @Override
     public void add(Restaurant entity) {

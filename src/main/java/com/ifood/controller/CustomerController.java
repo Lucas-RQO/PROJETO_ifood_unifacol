@@ -1,30 +1,42 @@
 package com.ifood.controller;
 
 import com.ifood.model.Customer;
-import com.ifood.service.CustomerService;
+import com.ifood.repository.CustomerRepositoryJDBC;
+import com.ifood.repository.ICustomerRepository;
 
 import java.util.List;
 
 public class CustomerController {
-    private final CustomerService service = new CustomerService();
 
-    public void addCustomer(int id, String name, String phone, String email) {
-        service.addCustomer(id, name, phone, email); // ✅ passar o email
+    private final ICustomerRepository repository = new CustomerRepositoryJDBC();
+
+    public void add(String name, String phone, String email) {
+        repository.add(new Customer(name, phone, email));
     }
 
-    public void removeCustomer(int id) {
-        service.removeCustomer(id);
+    public void update(int id, String name, String phone, String email) {
+        repository.update(new Customer(id, name, phone, email));
     }
 
-    public void updateCustomer(int id, String newName, String newPhone, String newEmail) {
-        service.updateCustomer(id, newName, newPhone, newEmail); // ✅ passar o email
+    public void delete(int id) {
+        repository.delete(id);
     }
 
-    public Customer findCustomerById(int id) {
-        return service.findCustomerById(id);
+    public void find(int id) {
+        Customer customer = repository.findById(id);
+        if (customer != null)
+            System.out.println(customer);
+        else
+            System.out.println("⚠️ Cliente não encontrado!");
     }
 
-    public List<Customer> getAllCustomers() {
-        return service.getAllCustomers();
+    public void listAll() {
+        List<Customer> customers = repository.findAll();
+        if (customers.isEmpty())
+            System.out.println("Nenhum cliente cadastrado.");
+        else {
+            System.out.println("\n=== Lista de Clientes ===");
+            customers.forEach(System.out::println);
+        }
     }
 }

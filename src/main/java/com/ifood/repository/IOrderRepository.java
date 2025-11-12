@@ -4,8 +4,9 @@ import com.ifood.model.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class IOrderRepository implements ICrudRepository<Order> {
-    private List<Order> orders = new ArrayList<>();
+    private final List<Order> orders = new ArrayList<>();
 
     @Override
     public void add(Order entity) {

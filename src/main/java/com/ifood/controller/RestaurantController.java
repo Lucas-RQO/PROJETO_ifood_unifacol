@@ -1,29 +1,63 @@
 package com.ifood.controller;
 
-import com.ifood.model.Restaurant;
-import com.ifood.service.RestaurantService;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantController {
-    private RestaurantService service = new RestaurantService();
 
-    public void addRestaurant(int id, String name) {
-        service.addRestaurant(id, name);
+    private static class Restaurant {
+        private static int nextId = 1;
+        private final int id;
+        private String name;
+
+        public Restaurant(String name) {
+            this.id = nextId++;
+            this.name = name;
+        }
+
+        public int getId() { return id; }
+        public void setName(String name) { this.name = name; }
+
+        @Override
+        public String toString() {
+            return "ID: " + id + " | Nome: " + name;
+        }
     }
 
-    public void removeRestaurant(int id) {
-        service.removeRestaurant(id);
+    private final List<Restaurant> restaurants = new ArrayList<>();
+
+    public void add(String name) {
+        restaurants.add(new Restaurant(name));
+        System.out.println("✅ Restaurante cadastrado com sucesso!");
     }
 
-    public void updateRestaurant(int id, String newName) {
-        service.updateRestaurant(id, newName);
+    public void update(int id, String name) {
+        for (Restaurant r : restaurants) {
+            if (r.getId() == id) {
+                r.setName(name);
+                System.out.println("🔄 Restaurante atualizado!");
+                return;
+            }
+        }
+        System.out.println("⚠️ Restaurante não encontrado.");
     }
 
-    public Restaurant findRestaurantById(int id) {
-        return service.findRestaurantById(id);
+    public void delete(int id) {
+        boolean removed = restaurants.removeIf(r -> r.getId() == id);
+        if (removed)
+            System.out.println("🗑️ Restaurante removido!");
+        else
+            System.out.println("⚠️ Restaurante não encontrado.");
     }
 
-    public List<Restaurant> getAllRestaurants() {
-        return service.getAllRestaurants();
+    public void listAll() {
+        if (restaurants.isEmpty()) {
+            System.out.println("Nenhum restaurante cadastrado.");
+            return;
+        }
+        System.out.println("\n=== Lista de Restaurantes ===");
+        for (Restaurant r : restaurants) {
+            System.out.println(r);
+        }
     }
 }

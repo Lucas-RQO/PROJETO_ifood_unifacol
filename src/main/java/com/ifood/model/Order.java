@@ -1,33 +1,34 @@
 package com.ifood.model;
 
-import java.util.List;
-
 public class Order {
     private int id;
-    private Customer customer;
-    private DeliveryPerson deliveryPerson;
-    private Restaurant restaurant;
-    private List<MenuItem> items;
+    private String customerName;
+    private String item;
+    private String status; // "Pendente", "Concluído"
 
-    public Order(int id, Customer customer, DeliveryPerson deliveryPerson,
-                 Restaurant restaurant, List<MenuItem> items) {
+    public Order() {}
+
+    public Order(int id, String customerName, String item, String status) {
         this.id = id;
-        this.customer = customer;
-        this.deliveryPerson = deliveryPerson;
-        this.restaurant = restaurant;
-        this.items = items;
+        this.customerName = customerName;
+        this.item = item;
+        this.status = status;
     }
 
     public int getId() { return id; }
-    public Customer getCustomer() { return customer; }
-    public DeliveryPerson getDeliveryPerson() { return deliveryPerson; }
-    public Restaurant getRestaurant() { return restaurant; }
-    public List<MenuItem> getItems() { return items; }
+    public void setId(int id) { this.id = id; }
 
-    @Override
-    public String toString() {
-        return "Pedido #" + id + " | Cliente: " + customer.getName()
-                + " | Restaurante: " + restaurant.getName()
-                + " | Itens: " + items.size();
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
+
+    public String getItem() { return item; }
+    public void setItem(String item) { this.item = item; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public void displayInfo() {
+        System.out.println("Pedido [ID=" + id + ", Cliente=" + customerName +
+                           ", Item=" + item + ", Status=" + status + "]");
     }
 }
