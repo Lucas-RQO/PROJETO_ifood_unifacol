@@ -9,8 +9,8 @@ public class CustomerRepositoryJDBC implements ICustomerRepository {
 
     private Connection connect() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/ifooddb";
-        String user = "root"; // <-- altere se necessário
-        String password = "123456"; // <-- altere se necessário
+        String user = "root";
+        String password = "123456";
         return DriverManager.getConnection(url, user, password);
     }
 
