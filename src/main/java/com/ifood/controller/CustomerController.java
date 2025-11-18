@@ -1,42 +1,37 @@
 package com.ifood.controller;
 
 import com.ifood.model.Customer;
-import com.ifood.repository.CustomerRepositoryJDBC;
-import com.ifood.repository.ICustomerRepository;
-
+import com.ifood.service.CustomerService;
 import java.util.List;
 
 public class CustomerController {
+    private final CustomerService service;
 
-    private final ICustomerRepository repository = new CustomerRepositoryJDBC();
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
 
     public void add(String name, String phone, String email) {
-        repository.add(new Customer(name, phone, email));
+        service.addCustomer(name, phone, email);
     }
 
     public void update(int id, String name, String phone, String email) {
-        repository.update(new Customer(id, name, phone, email));
+        service.updateCustomer(id, name, phone, email);
     }
 
     public void delete(int id) {
-        repository.delete(id);
-    }
-
-    public void find(int id) {
-        Customer customer = repository.findById(id);
-        if (customer != null)
-            System.out.println(customer);
-        else
-            System.out.println("⚠️ Cliente não encontrado!");
+        service.removeCustomer(id);
     }
 
     public void listAll() {
-        List<Customer> customers = repository.findAll();
-        if (customers.isEmpty())
+        List<Customer> customers = service.getAllCustomers();
+        if (customers.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
-        else {
-            System.out.println("\n=== Lista de Clientes ===");
-            customers.forEach(System.out::println);
+            return;
+        }
+        System.out.println("\n=== Lista de Clientes ===");
+        for (Customer c : customers) {
+            System.out.println("ID: " + c.getId() + " | Nome: " + c.getName() + " | Email: " + c.getEmail());
         }
     }
 }

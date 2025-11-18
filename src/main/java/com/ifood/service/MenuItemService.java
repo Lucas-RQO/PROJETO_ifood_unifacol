@@ -5,24 +5,22 @@ import com.ifood.repository.IMenuItemRepository;
 import java.util.List;
 
 public class MenuItemService {
-    private IMenuItemRepository repository = new IMenuItemRepository();
+    private final IMenuItemRepository repository;
 
-    public void addMenuItem(int id, String name, double price) {
-        MenuItem item = new MenuItem(id, name, price);
-        repository.add(item);
+    public MenuItemService(IMenuItemRepository repository) {
+        this.repository = repository;
     }
 
-    public void removeMenuItem(int id) {
-        repository.remove(id);
+    public void addMenuItem(String name, double price) {
+        repository.add(new MenuItem(name, price));
     }
 
     public void updateMenuItem(int id, String newName, double newPrice) {
-        MenuItem item = new MenuItem(id, newName, newPrice);
-        repository.update(id, item);
+        repository.update(new MenuItem(id, newName, newPrice));
     }
 
-    public MenuItem findMenuItemById(int id) {
-        return repository.findById(id);
+    public void removeMenuItem(int id) {
+        repository.delete(id);
     }
 
     public List<MenuItem> getAllMenuItems() {

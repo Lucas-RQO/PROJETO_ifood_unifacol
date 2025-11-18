@@ -1,35 +1,25 @@
 package com.ifood.model;
 
-public class Customer {
-    private int id;
-    private String name;
-    private String phone;
+public class Customer extends Person {
     private String email;
 
-    public Customer(int id, String name, String phone, String email) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-    }
-
+    // Construtor para criar (sem id)
     public Customer(String name, String phone, String email) {
-        this.name = name;
-        this.phone = phone;
+        super(name, phone);
         this.email = email;
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
-    public String getEmail() { return email; }
+    // Construtor para carregar (com id)
+    public Customer(int id, String name, String phone, String email) {
+        super(id, name, phone);
+        this.email = email;
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
     @Override
-    public String toString() {
-        return "ID: " + id + " | Nome: " + name + " | Telefone: " + phone + " | Email: " + email;
+    public void displayInfo() {
+        System.out.println("Cliente: " + getName() + " | Email: " + email);
     }
 }

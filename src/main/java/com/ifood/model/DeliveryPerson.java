@@ -3,8 +3,13 @@ package com.ifood.model;
 public class DeliveryPerson extends Person {
     private String vehicle;
 
+    public DeliveryPerson(String name, String vehicle) {
+        
+        super(0, name, "");
+        this.vehicle = vehicle;
+    }
+
     public DeliveryPerson(int id, String name, String vehicle) {
-        // Person currently expects (id, name, phone) - provide empty phone if not available
         super(id, name, "");
         this.vehicle = vehicle;
     }

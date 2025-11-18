@@ -1,68 +1,48 @@
 package com.ifood.controller;
 
-import java.util.ArrayList;
+import com.ifood.model.DeliveryPerson; 
+import com.ifood.service.DeliveryPersonService;
 import java.util.List;
 
 public class DeliveryPersonController {
 
-    private static class DeliveryPerson {
-        private static int nextId = 1;
-        private final int id;
-        private String name;
-        private String vehicle;
 
-        public DeliveryPerson(String name, String vehicle) {
-            this.id = nextId++;
-            this.name = name;
-            this.vehicle = vehicle;
-        }
+    
+    private final DeliveryPersonService service;
 
-        public int getId() { return id; }
-        public void setName(String name) { this.name = name; }
-        public void setVehicle(String vehicle) { this.vehicle = vehicle; }
-
-        @Override
-        public String toString() {
-            return "ID: " + id + " | Nome: " + name + " | Veículo: " + vehicle;
-        }
+    
+    public DeliveryPersonController(DeliveryPersonService service) {
+        this.service = service;
     }
-
-    private final List<DeliveryPerson> deliveryPeople = new ArrayList<>();
-
+    
     public void add(String name, String vehicle) {
-        deliveryPeople.add(new DeliveryPerson(name, vehicle));
-        System.out.println("✅ Entregador cadastrado com sucesso!");
+        service.addDeliveryPerson(name, vehicle);
+        
     }
 
     public void update(int id, String name, String vehicle) {
-        for (DeliveryPerson d : deliveryPeople) {
-            if (d.getId() == id) {
-                d.setName(name);
-                d.setVehicle(vehicle);
-                System.out.println("🔄 Entregador atualizado!");
-                return;
-            }
-        }
-        System.out.println("⚠️ Entregador não encontrado.");
+        service.updateDeliveryPerson(id, name, vehicle);
+        
     }
 
     public void delete(int id) {
-        boolean removed = deliveryPeople.removeIf(d -> d.getId() == id);
-        if (removed)
-            System.out.println("🗑️ Entregador removido!");
-        else
-            System.out.println("⚠️ Entregador não encontrado.");
+        service.removeDeliveryPerson(id);
+
     }
 
     public void listAll() {
+
+        List<DeliveryPerson> deliveryPeople = service.getAllDeliveryPeople();
+
         if (deliveryPeople.isEmpty()) {
             System.out.println("Nenhum entregador cadastrado.");
             return;
         }
-        System.out.println("\n=== Lista de Entregadores ===");
+
+        System.out.println("\n=== Lista de Entregadores (do Banco de Dados) ===");
         for (DeliveryPerson d : deliveryPeople) {
-            System.out.println(d);
+            
+            System.out.println(d.getDetails()); 
         }
     }
 }
-

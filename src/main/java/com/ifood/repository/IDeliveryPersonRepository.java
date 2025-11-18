@@ -1,39 +1,22 @@
 package com.ifood.repository;
 
 import com.ifood.model.DeliveryPerson;
-import java.util.ArrayList;
 import java.util.List;
 
-public class IDeliveryPersonRepository implements ICrudRepository<DeliveryPerson> {
-    private final List<DeliveryPerson> deliveryPeople = new ArrayList<>();
 
-    @Override
-    public void add(DeliveryPerson entity) {
-        deliveryPeople.add(entity);
-    }
+public interface IDeliveryPersonRepository {
+    
+    void add(DeliveryPerson deliveryPerson);
 
-    @Override
-    public void remove(int id) {
-        deliveryPeople.removeIf(d -> d.getId() == id);
-    }
 
-    @Override
-    public void update(int id, DeliveryPerson newEntity) {
-        for (int i = 0; i < deliveryPeople.size(); i++) {
-            if (deliveryPeople.get(i).getId() == id) {
-                deliveryPeople.set(i, newEntity);
-                return;
-            }
-        }
-    }
+    void update(DeliveryPerson deliveryPerson);
 
-    @Override
-    public DeliveryPerson findById(int id) {
-        return deliveryPeople.stream().filter(d -> d.getId() == id).findFirst().orElse(null);
-    }
+    
+    void delete(int id);
 
-    @Override
-    public List<DeliveryPerson> findAll() {
-        return deliveryPeople;
-    }
+    
+    DeliveryPerson findById(int id);
+
+    
+    List<DeliveryPerson> findAll();
 }

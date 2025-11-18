@@ -7,12 +7,25 @@ import java.util.*;
 public class MainView {
     private final Scanner scanner = new Scanner(System.in);
 
-    private final CustomerController customerController = new CustomerController();
-    private final DeliveryPersonController deliveryPersonController = new DeliveryPersonController();
-    private final RestaurantController restaurantController = new RestaurantController();
-    private final MenuItemController menuItemController = new MenuItemController();
-    private final OrderController orderController = new OrderController();
+    private final CustomerController customerController;
+    private final DeliveryPersonController deliveryPersonController;
+    private final RestaurantController restaurantController;
+    private final MenuItemController menuItemController;
+    private final OrderController orderController;
 
+    public MainView(CustomerController customerController,
+                    DeliveryPersonController deliveryPersonController,
+                    RestaurantController restaurantController,
+                    MenuItemController menuItemController,
+                    OrderController orderController) {
+        
+        this.customerController = customerController;
+        this.deliveryPersonController = deliveryPersonController;
+        this.restaurantController = restaurantController;
+        this.menuItemController = menuItemController;
+        this.orderController = orderController;
+    }
+    
     public void start() {
         int option;
         do {
@@ -176,16 +189,28 @@ public class MainView {
 
         switch (op) {
             case 1 -> {
-                System.out.print("ID (0 para automático): ");
-                int id = scanner.nextInt(); scanner.nextLine();
-                System.out.print("Nome do Cliente: ");
-                String cliente = scanner.nextLine();
-                System.out.print("Item do Pedido: ");
-                String item = scanner.nextLine();
+                // ------ LÓGICA ATUALIZADA ------
+                
+                // 1. Liste os Restaurantes disponíveis
+                System.out.println("--- Restaurantes Disponíveis ---");
+                restaurantController.listAll(); // Reutiliza o controller de restaurante
+                System.out.print("Digite o ID do Restaurante: ");
+                int restId = scanner.nextInt(); scanner.nextLine();
 
-                // Usa o método simplificado do OrderService (fila e pilha)
-                orderController.addOrder(id, cliente, null, null, List.of(new MenuItem(1, item, 0)));
+                // 2. Liste os Itens de Menu disponíveis
+                System.out.println("\n--- Itens de Menu Disponíveis ---");
+                menuItemController.listAll(); // Reutiliza o controller de item
+                System.out.print("Digite o ID do Item de Menu: ");
+                int itemId = scanner.nextInt(); scanner.nextLine();
+                
+                // 3. Peça o nome do cliente
+                System.out.print("Nome do Cliente (para entrega): ");
+                String cliente = scanner.nextLine();
+
+                // 4. Chame o controller atualizado
+                orderController.addOrder(cliente, restId, itemId);
             }
+            // O resto dos casos continua igual
             case 2 -> orderController.processNextOrder();
             case 3 -> orderController.listPendingOrders();
             case 4 -> orderController.listCompletedOrders();

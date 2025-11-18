@@ -5,27 +5,31 @@ import com.ifood.repository.IRestaurantRepository;
 import java.util.List;
 
 public class RestaurantService {
-    private IRestaurantRepository repository = new IRestaurantRepository();
+    private final IRestaurantRepository repository;
 
-    public void addRestaurant(int id, String name) {
-        Restaurant restaurant = new Restaurant(id, name);
-        repository.add(restaurant);
+    public RestaurantService(IRestaurantRepository repository) {
+        this.repository = repository;
     }
 
-    public void removeRestaurant(int id) {
-        repository.remove(id);
+    public void addRestaurant(String name) {
+        // Usa o construtor SEM id
+        repository.add(new Restaurant(name));
     }
 
     public void updateRestaurant(int id, String newName) {
-        Restaurant restaurant = new Restaurant(id, newName);
-        repository.update(id, restaurant);
+        // Usa o construtor COM id
+        repository.update(new Restaurant(id, newName));
     }
 
-    public Restaurant findRestaurantById(int id) {
-        return repository.findById(id);
+    public void removeRestaurant(int id) {
+        repository.delete(id);
     }
 
     public List<Restaurant> getAllRestaurants() {
         return repository.findAll();
+    }
+    
+    public Restaurant findRestaurantById(int id) {
+        return repository.findById(id);
     }
 }

@@ -5,20 +5,31 @@ import com.ifood.repository.IDeliveryPersonRepository;
 import java.util.List;
 
 public class DeliveryPersonService {
-    private final IDeliveryPersonRepository repository = new IDeliveryPersonRepository();
+    
+    
+    private final IDeliveryPersonRepository repository;
 
-    public void addDeliveryPerson(int id, String name, String vehicle) {
-        DeliveryPerson deliveryPerson = new DeliveryPerson(id, name, vehicle);
-        repository.add(deliveryPerson);
+ 
+    public DeliveryPersonService(IDeliveryPersonRepository repository) {
+        this.repository = repository;
+    }
+
+
+    public void addDeliveryPerson(String name, String vehicle) {
+     
+        DeliveryPerson deliveryPerson = new DeliveryPerson(name, vehicle);
+        repository.add(deliveryPerson); 
     }
 
     public void removeDeliveryPerson(int id) {
-        repository.remove(id);
+      
+        repository.delete(id); 
     }
 
     public void updateDeliveryPerson(int id, String newName, String newVehicle) {
+        
         DeliveryPerson deliveryPerson = new DeliveryPerson(id, newName, newVehicle);
-        repository.update(id, deliveryPerson);
+        repository.update(deliveryPerson);
     }
 
     public DeliveryPerson findDeliveryPersonById(int id) {
